@@ -8,3 +8,12 @@ View(titanic_original)
 # Step 1 - Port of embarkation
 titanic_clean <- titanic_original %>% 
   mutate(embarked = replace(embarked, is.na(embarked) == TRUE, 'S'))
+
+# Step 2 - Age
+# 1. Calculate the mean of the Age column, and use that value to populate the missing values.
+mean_age <- titanic_original %>% 
+  summarise(avg = mean(age, na.rm = TRUE))
+titanic_clean <- titanic_clean %>% 
+  mutate(age = replace(age, is.na(age) == TRUE, round(mean_age[1,1], 2)))
+
+# Step 3 - Lifeboat
