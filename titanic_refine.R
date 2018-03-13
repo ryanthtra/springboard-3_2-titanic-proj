@@ -19,3 +19,7 @@ titanic_clean <- titanic_clean %>%
 # Step 3 - Lifeboat: replace missing boat values with 'None'
 titanic_clean <- titanic_clean %>% 
   mutate(boat = replace(boat, is.na(boat) == TRUE, 'None'))
+
+# Step 4 - Cabin
+titanic_clean <- titanic_clean %>% 
+  mutate(has_cabin_number = if_else(is.na(cabin), 0, 1))
