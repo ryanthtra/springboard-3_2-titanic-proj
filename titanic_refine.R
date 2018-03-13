@@ -16,4 +16,6 @@ mean_age <- titanic_original %>%
 titanic_clean <- titanic_clean %>% 
   mutate(age = replace(age, is.na(age) == TRUE, round(mean_age[1,1], 2)))
 
-# Step 3 - Lifeboat
+# Step 3 - Lifeboat: replace missing boat values with 'None'
+titanic_clean <- titanic_clean %>% 
+  mutate(boat = replace(boat, is.na(boat) == TRUE, 'None'))
